@@ -24,7 +24,15 @@ type Message = {
   text: string;
 };
 
-export function ChatInterface() {
+interface ChatInterfaceProps {
+  onFirstMessage?: () => void;
+  isChatStarted?: boolean;
+}
+
+export function ChatInterface({
+  onFirstMessage,
+  isChatStarted,
+}: ChatInterfaceProps) {
   const [messages, setMessages] = useState<Message[]>([
     {
       id: 'initial-bot-message',
@@ -39,7 +47,8 @@ export function ChatInterface() {
 
   useEffect(() => {
     if (scrollAreaViewport.current) {
-      scrollAreaViewport.current.scrollTop = scrollAreaViewport.current.scrollHeight;
+      scrollAreaViewport.current.scrollTop =
+        scrollAreaViewport.current.scrollHeight;
     }
   }, [messages, isLoading]);
 
@@ -47,6 +56,10 @@ export function ChatInterface() {
     e.preventDefault();
     const messageText = inputValue.trim();
     if (!messageText || isLoading) return;
+
+    if (messages.length === 1) {
+      onFirstMessage?.();
+    }
 
     const userMessage: Message = {
       id: crypto.randomUUID(),
@@ -78,12 +91,24 @@ export function ChatInterface() {
   };
 
   return (
-    <Card className="w-full max-w-2xl mx-auto shadow-2xl shadow-primary/20 border-border">
-      <CardHeader className="text-center">
+    <Card
+      className={cn(
+        'flex flex-col w-full max-w-2xl mx-auto shadow-2xl shadow-primary/20 border-border transition-all duration-500',
+        isChatStarted ? 'h-[85vh]' : 'h-auto'
+      )}
+    >
+      <CardHeader
+        className={cn(
+          'text-center transition-all',
+          isChatStarted ? 'hidden' : 'block'
+        )}
+      >
         <CardTitle className="text-2xl font-bold">HellTech Chat</CardTitle>
       </CardHeader>
-      <CardContent>
-        <ScrollArea className="h-[50vh] pr-4">
+      <CardContent className="flex-grow p-6 pt-0 overflow-y-auto">
+        <ScrollArea
+          className={cn('pr-4', isChatStarted ? 'h-full' : 'h-[50vh]')}
+        >
           <div className="flex flex-col gap-4" ref={scrollAreaViewport}>
             {messages.map((message) => (
               <div
@@ -119,27 +144,30 @@ export function ChatInterface() {
                 )}
               </div>
             ))}
-             {isLoading && (
-                <div className="flex items-end gap-3 justify-start">
-                    <Avatar className="h-8 w-8 border-2 border-primary">
-                        <AvatarFallback className="bg-transparent">
-                            <Bot className="h-5 w-5 text-primary animate-pulse"/>
-                        </AvatarFallback>
-                    </Avatar>
-                    <div className="bg-secondary text-secondary-foreground rounded-xl px-4 py-3 shadow-md">
-                        <div className="flex items-center justify-center gap-1.5">
-                            <span className="h-2 w-2 bg-primary rounded-full animate-pulse [animation-delay:-0.3s]"></span>
-                            <span className="h-2 w-2 bg-primary rounded-full animate-pulse [animation-delay:-0.15s]"></span>
-                            <span className="h-2 w-2 bg-primary rounded-full animate-pulse"></span>
-                        </div>
-                    </div>
+            {isLoading && (
+              <div className="flex items-end gap-3 justify-start">
+                <Avatar className="h-8 w-8 border-2 border-primary">
+                  <AvatarFallback className="bg-transparent">
+                    <Bot className="h-5 w-5 text-primary animate-pulse" />
+                  </AvatarFallback>
+                </Avatar>
+                <div className="bg-secondary text-secondary-foreground rounded-xl px-4 py-3 shadow-md">
+                  <div className="flex items-center justify-center gap-1.5">
+                    <span className="h-2 w-2 bg-primary rounded-full animate-pulse [animation-delay:-0.3s]"></span>
+                    <span className="h-2 w-2 bg-primary rounded-full animate-pulse [animation-delay:-0.15s]"></span>
+                    <span className="h-2 w-2 bg-primary rounded-full animate-pulse"></span>
+                  </div>
                 </div>
+              </div>
             )}
           </div>
         </ScrollArea>
       </CardContent>
       <CardFooter>
-        <form onSubmit={handleSubmit} className="flex w-full items-center gap-2">
+        <form
+          onSubmit={handleSubmit}
+          className="flex w-full items-center gap-2"
+        >
           <Input
             type="text"
             placeholder="Ask about our courses..."
@@ -149,7 +177,12 @@ export function ChatInterface() {
             className="flex-1"
             autoComplete="off"
           />
-          <Button type="submit" size="icon" disabled={isLoading || !inputValue.trim()} className="shrink-0">
+          <Button
+            type="submit"
+            size="icon"
+            disabled={isLoading || !inputValue.trim()}
+            className="shrink-0"
+          >
             <SendHorizonal className="h-5 w-5" />
             <span className="sr-only">Send Message</span>
           </Button>
