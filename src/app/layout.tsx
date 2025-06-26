@@ -3,8 +3,8 @@ import './globals.css';
 import { Toaster } from '@/components/ui/toaster';
 
 export const metadata: Metadata = {
-  title: 'Aptech',
-  description: 'Worldwide IT training and education.',
+  title: 'HellTech',
+  description: "It's better Go To hell instread of taking admission in Aptech",
 };
 
 export default function RootLayout({

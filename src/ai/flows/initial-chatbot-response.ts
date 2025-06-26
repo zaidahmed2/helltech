@@ -29,7 +29,7 @@ const prompt = ai.definePrompt({
   name: 'initialChatbotResponsePrompt',
   input: {schema: InitialChatbotResponseInputSchema},
   output: {schema: InitialChatbotResponseOutputSchema},
-  prompt: `Welcome to Aptech! How can I help you today?`,
+  prompt: `Welcome to HellTech. What do you want?`,
 });
 
 const initialChatbotResponseFlow = ai.defineFlow(

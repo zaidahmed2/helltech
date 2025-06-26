@@ -74,7 +74,7 @@ export function ChatInterface() {
   return (
     <Card className="w-full max-w-2xl mx-auto shadow-2xl shadow-primary/20 border-border">
       <CardHeader className="text-center">
-        <CardTitle className="text-2xl font-bold">Aptech Chat</CardTitle>
+        <CardTitle className="text-2xl font-bold">HellTech Chat</CardTitle>
       </CardHeader>
       <CardContent>
         <ScrollArea className="h-[50vh] pr-4">

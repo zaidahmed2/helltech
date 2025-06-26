@@ -7,7 +7,7 @@ export default function Home() {
       <div className="mb-4">
         <Image
           src="https://www.logo.wine/a/logo/Aptech/Aptech-Logo.wine.svg"
-          alt="Aptech Logo"
+          alt="HellTech Logo"
           width={240}
           height={120}
           priority
@@ -15,10 +15,10 @@ export default function Home() {
       </div>
       <div className="text-center mb-8">
         <h1 className="text-5xl md:text-7xl font-bold text-primary">
-          Aptech
+          HellTech
         </h1>
         <p className="mt-2 text-lg md:text-xl text-muted-foreground font-headline">
-          Worldwide IT training and education.
+          It's better Go To hell instread of taking admission in Aptech
         </p>
       </div>
       <ChatInterface />
