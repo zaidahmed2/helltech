@@ -63,8 +63,8 @@ export function ChatInterface() {
     } catch (error) {
       toast({
         variant: 'destructive',
-        title: 'Infernal Error',
-        description: 'Failed to get a response from the depths.',
+        title: 'Error',
+        description: 'Failed to get a response. Please try again.',
       });
     } finally {
       setIsLoading(false);
@@ -74,7 +74,7 @@ export function ChatInterface() {
   return (
     <Card className="w-full max-w-2xl mx-auto shadow-2xl shadow-primary/20 border-border">
       <CardHeader className="text-center">
-        <CardTitle className="text-2xl font-bold">HellTech Chat</CardTitle>
+        <CardTitle className="text-2xl font-bold">Aptech Chat</CardTitle>
       </CardHeader>
       <CardContent>
         <ScrollArea className="h-[50vh] pr-4">
@@ -136,7 +136,7 @@ export function ChatInterface() {
         <form onSubmit={handleSubmit} className="flex w-full items-center gap-2">
           <Input
             type="text"
-            placeholder="Go on, ask the abyss..."
+            placeholder="Ask about our courses..."
             value={inputValue}
             onChange={(e) => setInputValue(e.target.value)}
             disabled={isLoading}

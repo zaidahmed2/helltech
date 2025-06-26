@@ -29,7 +29,7 @@ const prompt = ai.definePrompt({
   name: 'initialChatbotResponsePrompt',
   input: {schema: InitialChatbotResponseInputSchema},
   output: {schema: InitialChatbotResponseOutputSchema},
-  prompt: `Hey, I’m here to answer!`,
+  prompt: `Welcome to Aptech! How can I help you today?`,
 });
 
 const initialChatbotResponseFlow = ai.defineFlow(
@@ -40,8 +40,6 @@ const initialChatbotResponseFlow = ai.defineFlow(
   },
   async input => {
     const {output} = await prompt(input);
-    return {
-      chatbotResponse: output!,
-    };
+    return output!;
   }
 );

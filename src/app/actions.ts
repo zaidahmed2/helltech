@@ -12,6 +12,6 @@ export async function getChatbotResponse(
   } catch (error) {
     console.error('Error getting chatbot response:', error);
     // Return a themed error message
-    return { chatbotResponse: "I've encountered a glitch in the inferno. Please try again." };
+    return { chatbotResponse: "I'm sorry, I'm having trouble connecting to our systems right now. Please try again in a moment." };
   }
 }
