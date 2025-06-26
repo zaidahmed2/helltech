@@ -25,7 +25,13 @@ type Message = {
 };
 
 export function ChatInterface() {
-  const [messages, setMessages] = useState<Message[]>([]);
+  const [messages, setMessages] = useState<Message[]>([
+    {
+      id: 'initial-bot-message',
+      sender: 'bot',
+      text: 'Aptech ke jahannum mein welcome! 👋 Yahan admission lene se acha hai seedha jahannum mein chale jao, kam az kam wahan AC to chalta hai.',
+    },
+  ]);
   const [inputValue, setInputValue] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const { toast } = useToast();
